@@ -1,0 +1,21 @@
+/**
+ * \file            version.h
+ * \brief           xgen-bytes package and ABI identity
+ * \author          X-Gen Lab
+ */
+
+#ifndef XGB_VERSION_H
+#define XGB_VERSION_H
+
+/** \brief           Package major version. */
+#define XGB_VERSION_MAJOR @PROJECT_VERSION_MAJOR@
+/** \brief           Package minor version. */
+#define XGB_VERSION_MINOR @PROJECT_VERSION_MINOR@
+/** \brief           Package patch version. */
+#define XGB_VERSION_PATCH @PROJECT_VERSION_PATCH@
+/** \brief           Complete package version. */
+#define XGB_VERSION_STRING "@PROJECT_VERSION@"
+/** \brief           Public binary interface revision. */
+#define XGB_ABI_VERSION @XGB_ABI_VERSION@
+
+#endif
