@@ -69,4 +69,4 @@ coverage preset 使用 GCC，需显式准备匹配的 GoogleTest、gcov 与质�
 
 当前未设置远端、未发布 tag，源码授权仍待确认。主机通过不代表 Linux CI 已运行，也不代表 64 KiB Flash / 8 KiB RAM 的完整 MCU/Boot 镜像已经验收。
 
-启用远端 CI 前，设置仓库变量 `XGEN_QUALITY_REPOSITORY` 为真实可读取的工具仓库 `owner/repository`。CI 按配置中的固定提交获取工具，地址缺失或提交不可获取时明确失败；当前此远端准备项尚未完成。
+CI 显式从 `X-Gen-Lab/xgen-quality` 获取配置中固定的工具提交，允许用 `XGEN_QUALITY_REPOSITORY` 覆盖为受控镜像。仓库覆盖、固定提交不可获取或安装版本不符时失败；不跟随依赖主分支，远端验证与本地结果分别记录。
