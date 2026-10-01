@@ -4,15 +4,23 @@
 
 | 范围 | 采用方式 |
 | --- | --- |
-| C/C++ | 生产 C11，GoogleTest Host C++17，Nexus 排版和英文源码注释 |
+| C/C++ | 生产 C11，GoogleTest Host C++17，X-Gen 排版和英文源码注释 |
 | 公共契约 | 12 个 API 明确容量、字节序、对齐、NULL、所有权和串行化责任 |
 | 构建 | 公开 xgb::bytes target，独立包版本与 ABI，无隐式下载和兄弟路径假设 |
 | TDD | 纯迁移来源基线；新增包契约先实际 RED，再实现与回归 |
 | 质量 | 显式安装独立 xgen-quality；模块维护薄入口、范围和受控配置 |
 | 发布 | 未配置远端；源码授权、公开 tag 和产品迁移状态单独记录 |
 
-`.clang-format` 与 `.editorconfig` 受控同步自 roadmap 的 Nexus 快照；保留来源说明，变更通过审阅。通用检查属于 xgen-quality，产品编排属于 xgen-build，不相互替代；基础质量从 S1 启用。
+`.clang-format` 与 `.editorconfig` 受控同步自 roadmap 的 X-Gen 快照；保留来源说明，变更通过审阅。通用检查属于 xgen-quality，产品编排属于 xgen-build，不相互替代；基础质量从 S1 启用。
 
 本组件是固定宽度整数原语，调用方先保证非空指针有 2/4/8 字节容量。NULL 是已有的有效兼容输入；没有长度参数，不伪造容量错误码或改变现有契约。它不接受外部消息长度，也不承担上层协议验证。
 
 没有新增永久规范豁免。MCU/Boot 资源、上板时序和远端 CI 在未执行前保持待验证。源码授权状态遵循 [来源记录](../PROVENANCE.md)。本地采用不是全组织接入声明，实际执行见 [实施记录](implementation-log.md)。
+
+## 2026-10-01 空行规范采用
+
+采用上述初始来源之后、尚未发布的工程规范 1.0.0 local 增补 C-020、C-021、DOC-013。本轮仅迁移空行和 LF，不改变生产或测试代码行为。根 `.clang-format` 对应受控模板 SHA-256 `ffdb331b03ae4f6c5f75ee54d4afaa6d4741f5ac3ec57f55b0f04ad8ec396a2a`；配置来源和实际增补见 [来源记录](../PROVENANCE.md)。
+
+`python tools/quality.py format` 是只读检查入口，由固定 clang-format 19.1.5 检查排版，并由共享工具检查其支持的公共 C 头结构分隔、独立 API 注释与声明组，以及 Doxygen 紧邻直接声明的形式。它不声称覆盖任意 C++ AST；条件包装、复杂宏、函数内语义阶段和字段分组仍需人工评审。
+
+共享工具当前版本和固定源码来源只在 [tools/quality.json](../tools/quality.json) 维护；初始规范提交不代表已经包含这次增补。采用记录与实际执行证据分开，本次同步不声明远端 CI 已运行。
