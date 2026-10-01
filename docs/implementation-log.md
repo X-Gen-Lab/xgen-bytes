@@ -8,7 +8,7 @@
 
 迁移来源为 xgen-core `dc5eb1167ba21de384e7a760a8586b87502b73b2`。协调任务在迁移前运行原 `xgc_bytes`、`xgc_status`，**2/2 通过**；bytes 对应原 `tests/test_core.c` 的大小端向量、非对齐、NULL 与固定种子 4096 次往返。
 
-本组件将 `src/bytes.c` 的公开符号从 `xgc_` 改为 `xgb_`、包含路径改为 `xgen/bytes/bytes.h`，再应用 Nexus 排版。归一化这两项命名变化并去除空白后，与来源源码完全相同；没有修改算法和 NULL 行为。纯迁移使用来源基线，不人为破坏算法制造 RED。
+本组件将 `src/bytes.c` 的公开符号从 `xgc_` 改为 `xgb_`、包含路径改为 `xgen/bytes/bytes.h`，再应用 X-Gen 排版。归一化这两项命名变化并去除空白后，与来源源码完全相同；没有修改算法和 NULL 行为。纯迁移使用来源基线，不人为破坏算法制造 RED。
 
 ## 新包契约的 RED / GREEN
 
@@ -40,7 +40,7 @@ Windows 环境，CMake 4.2、Ninja、GCC/G++ 13.2.0；MSVC 使用 VS2022 `19.40.
 | 参数化发现 | 30 个稳定命名 unit、14 个 integration | out/evidence/host-discovery.json |
 | 生产依赖与符号 | 12 个公开符号，无未解析外部符号 | out/evidence/defined-symbols.txt、undefined-symbols.txt |
 | 来源行为与插桩范围 | 命名归一化后源码一致；只有 bytes.c 插桩 | out/evidence/production-contracts.txt |
-| Nexus 格式 | clang-format 19.1.5 对自有 C/C++ dry-run 通过 | 与受控 .clang-format 配套运行 |
+| X-Gen 格式 | clang-format 19.1.5 对自有 C/C++ dry-run 通过 | 与受控 .clang-format 配套运行 |
 
 参数化测试分别覆盖六种宽度/字节序组合的独立写入向量、独立读取向量、偏移 0–7、周围字节保护、输入不变、全部 NULL 分支、零/最大值/逐位值和原固定随机语料。
 
@@ -78,7 +78,7 @@ Host 与 coverage 预设默认查找 `out/deps/gtest`；本次实际测试通过
 
 Windows 本地实际完成 text、clang-format 19.1.5、Doxygen 1.16.0、cppcheck 2.21.0、clang-tidy 19.1.0、CTest 与 gcovr 8.3 检查，全部通过。原始结果在 `out/reports/quality-*.json`；工具自身的 66 项 Python 回归在 xgen-quality 执行，组件不再复制这套测试。实现阶段的报告保留当时源码和安装身份；最终 wheel 更新了模板与元数据，运行 Python 和 policy 内容已逐字节核对为受测版本。
 
-已安装本地 pre-commit 钩子；暂存完整自有文件后运行 `python -m pre_commit run --all-files`，文本/配置与 Nexus C/C++ 格式两项通过，`git diff --cached --check` 通过。三个消费者固定到同一工具提交。远端 CI 仍需真实可读取的工具仓库及 `XGEN_QUALITY_REPOSITORY` 变量，当前未执行。
+已安装本地 pre-commit 钩子；暂存完整自有文件后运行 `python -m pre_commit run --all-files`，文本/配置与 X-Gen C/C++ 格式两项通过，`git diff --cached --check` 通过。三个消费者固定到同一工具提交。远端 CI 仍需真实可读取的工具仓库及 `XGEN_QUALITY_REPOSITORY` 变量，当前未执行。
 
 共享 runner 运行最终 44/44 CTest 通过；自有生产对象的行、函数与分支覆盖率均为 100%。独立虚拟环境的固定依赖安装及 pip check 通过。
 

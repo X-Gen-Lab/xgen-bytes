@@ -1,7 +1,7 @@
 # 仓库工作约定
 
 - 始终使用简体中文与用户沟通；修改前阅读 CONTRIBUTING.md、docs/standards.md 和 PROVENANCE.md。
-- 遵循 Nexus 格式和反斜杠 Doxygen；使用受控 .clang-format，不回退到原 core 的排版。
+- 遵循 X-Gen 格式和反斜杠 Doxygen；使用受控 .clang-format，函数大括号同行，指针靠类型。
 - 生产保持 C11、无堆、无全局可变状态和外部组件依赖；Host GoogleTest 测试使用 C++17。
 - 保持 12 个整数读写接口的大小端、非对齐和 NULL 行为。缓冲区容量是明确的调用前提，不擅自改为协议解析器或引入 status 依赖。
 - 纯迁移先验证来源基线；新行为和缺陷修复记录真实 RED/GREEN。测试链接生产 target，不复制生产算法来计算期望值。
